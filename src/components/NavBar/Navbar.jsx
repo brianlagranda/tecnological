@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import CartWidgetIcon from './CartWidget/CartWidget';
+import CartWidgetIcon from '../CartWidget/CartWidget';
 
 export default function NavBar() {
     return (
