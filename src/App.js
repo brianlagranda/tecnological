@@ -1,5 +1,6 @@
 import NavBar from './components/NavBar/Navbar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import ItemCount from './components/ItemCount/ItemCount';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -10,6 +11,7 @@ function App() {
     <>
       <NavBar/>
       <ItemListContainer/>
+      <ItemCount initialQuantity={1} />
     </>
   );
 }

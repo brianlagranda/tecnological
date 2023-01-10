@@ -5,7 +5,9 @@ import styles from './ItemListContainer.module.css';
 export default function ItemListContainer() {
     return (
         <Stack gap={2} className="col-md-3 mx-auto">
-            <div className={styles.greeting}>Bienvenid@s! Encontrá los componentes de pc más buscados.</div>
+            <div className={styles.greeting}>
+                Bienvenid@! Encontrá los componentes de pc más buscados.
+            </div>
         </Stack>
     );
 }
