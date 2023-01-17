@@ -1,29 +1,33 @@
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import { Link } from "react-router-dom";
 import CartWidgetIcon from '../CartWidget/CartWidget';
+import "../navbar/navbar.css";
 
-export default function NavBar() {
-    return (
-        <>
-            <Navbar bg="dark" variant="dark">
-                <Container fluid>
-                    <Col>
-                        <Navbar.Brand href="#home">Tecnological</Navbar.Brand>
-                    </Col>
-                    <Col>
-                        <Nav className="justify-content-end">
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#products">Products</Nav.Link>
-                            <Nav.Link href="#help">Help</Nav.Link>
-                        </Nav>
-                    </Col>
-                    <Col md="auto">
-                        <CartWidgetIcon />
-                    </Col>
-                </Container>
-            </Navbar>
-        </>
-    );
+function NavBar() {
+
+  return (
+    <nav>
+      <ul className="nav-menu">
+        <h2>
+          <li>
+            <Link to="/">Tecnological</Link>
+          </li>
+        </h2>
+
+        <li className="nav-item">
+          <Link className="nav-link" to="/category/smartphones">
+            PC
+          </Link>
+        </li>
+
+        <li className="nav-item">
+          <Link className="nav-link" to="/category/laptops">
+            Notebooks
+          </Link>
+        </li>
+        <CartWidgetIcon />
+      </ul>
+    </nav>
+  );
 }
+
+export default NavBar;

@@ -1,13 +1,38 @@
-import * as React from 'react';
-import Stack from 'react-bootstrap/Stack';
-import styles from './ItemListContainer.module.css';
+import React, { useState, useEffect } from "react";
+import getItems, { getItemsByCategory } from "../../services/mockAsyncService";
+import ItemList from "../itemList/ItemList";
 
-export default function ItemListContainer() {
-    return (
-        <Stack gap={2} className="col-md-3 mx-auto">
-            <div className={styles.greeting}>
-                Bienvenid@! Encontrá los componentes de pc más buscados.
-            </div>
-        </Stack>
-    );
+function ItemListContainer() {
+  const [products, setProducts] = useState([]);
+
+  let idcategory = undefined;
+
+  //con async await - try catch
+  async function getProducts() {
+    if (!idcategory) {
+      try {
+        let response = await getItems();
+        setProducts(response);
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      let response = await getItemsByCategory(idcategory);
+      setProducts(response);
+    }
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  return (
+    <>
+      <div>
+        <ItemList products={products} />
+      </div>
+    </>
+  );
 }
+
+export default ItemListContainer;
