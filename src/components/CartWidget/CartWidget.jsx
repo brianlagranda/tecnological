@@ -16,7 +16,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 export default function CartWidgetIcon() {
     return (
         <IconButton aria-label="cart">
-            <StyledBadge badgeContent={4} color="primary">
+            <StyledBadge badgeContent={4} style={{ color: "black" }} color="primary">
                 <ShoppingCartIcon />
             </StyledBadge>
         </IconButton>
