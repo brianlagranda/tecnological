@@ -9,7 +9,6 @@ export default function Button(props) {
   );
 }
 
-// named exports
 export function ButtonChild(props) {
 
   function handleClick() {
