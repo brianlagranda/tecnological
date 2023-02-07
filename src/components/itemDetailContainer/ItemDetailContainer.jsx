@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getSingleItem } from "../../services/mockAsyncService";
-import ItemCount from "../itemCount/ItemCount";
+import ItemCount from "../ItemCount/ItemCount";
 import "./itemdetail.css";
 
 function ItemDetailContainer() {
