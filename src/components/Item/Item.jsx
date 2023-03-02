@@ -10,8 +10,6 @@ function Item({ id, brand, detail, imgurl, model, price }) {
 
   let productName = brand + "-" + model;
 
-  console.log(model)
-
   return (
     <Link to={urlDetail}>
       <div className="item-card">

@@ -257,7 +257,7 @@ export function getItems() {
 
 export function getSingleItem(itemid) {
   let itemReq = databaseItems.find((item) => {
-    return item.id == itemid;
+    return item.id === itemid;
   });
 
   return new Promise((resolve, reject) => {

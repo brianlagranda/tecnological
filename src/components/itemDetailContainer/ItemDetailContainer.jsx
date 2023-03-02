@@ -1,37 +1,93 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getSingleItem } from "../../services/mockAsyncService";
-import ItemCount from "../ItemCount/ItemCount";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useParams } from "react-router-dom";
+import { getSingleItem } from "../../services/firebase";
+import { cartContext } from "../../storage/cartContext";
+import ItemCount from "../ItemCount/ItemCount.jsx";
+import Spinner from "../Spinner/Spinner.jsx";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./itemdetail.css";
+import { ButtonChild } from "../button/Button";
 
 function ItemDetailContainer() {
-  const [product, setProduct] = useState([]);
+  const [isReady, setReady] = useState(false);
+  const [fullCart, setCart] = useState(false);
+  const [item, setItem] = useState([]);
+  const { findItem } = useContext(cartContext);
 
-  const params = useParams()
+  const params = useParams();
   const id = params.id;
 
-  let productName = product.brand + " - " + product.model;
+  const itemFind = findItem(item.id);
+
+  let realStock;
+
+  if (itemFind) {
+    realStock = item.stock - itemFind.cant;
+  }
+  else {
+    realStock = item.stock;
+  }
+
+  async function getItemAsync() {
+    try {
+      let res = await getSingleItem(id);
+      setItem(res);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setReady(false);
+    }
+  }
 
   useEffect(() => {
-    getSingleItem(id)
-      .then((respuesta) => {
-        setProduct(respuesta);
-      })
-      .catch((error) => alert(`Error: ${error}`));
+    getItemAsync();
   }, []);
 
+  const { addItemToCart } = useContext(cartContext);
+
+  function addToCart(cant) {
+    item.cant = cant;
+    addItemToCart(item);
+    if (addItemToCart(item)) {
+      toast.success("The product has been added to your cart");
+      setCart(true);
+    }
+    else {
+      toast.error("The product is already in your cart");
+    }
+  }
+
+  if (isReady) return <Spinner />;
+
   return (
-    <div className="card-detail_main">
-      <div className="card-detail_img">
-        <img src={product.imgurl} alt={productName} />
+    <>
+      <div className="card-detail_main">
+        <div className="card-detail_img">
+          <img src={item.imgurl} alt="img" />
+        </div>
+
+        <div className="card-detail_detail">
+          <h1 className="cardDetail_title">{item.title}</h1>
+          <h2 className="cardDetail_price">$ {item.price}</h2>
+          <p className="cardInfo">{item.detail}</p>
+          {fullCart === false ? (
+            <div className="cardDetail_buttons">
+              <ItemCount addToCart={addToCart} start={0} stock={item.stock} />
+            </div>)
+            : (
+              <>
+                <Link to="/cart">
+                  <ButtonChild>Ir al carrito</ButtonChild>
+                </Link>
+
+                <p className="cartInfo">El producto ha sido añadido al carrito</p>
+              </>
+            )}
+        </div>
       </div>
-      <div className="card-detail_detail">
-        <h1>{productName}</h1>
-        <h2 className="priceTag">$ {product.price}</h2>
-        <small>{product.detail}</small>
-      </div>
-      <ItemCount start={0} stock={product.stock} />
-    </div>
+      <ToastContainer />
+    </>
   );
 }
 

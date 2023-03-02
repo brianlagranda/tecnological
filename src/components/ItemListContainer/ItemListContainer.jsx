@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { getItemsByCategory } from "../../services/mockAsyncService";
-import { getItems } from "../../services/mockAsyncService";
+import { getItemsByCategory } from "../../services/firebase";
+import { getItems } from "../../services/firebase";
 import ItemList from "../itemList/ItemList";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Spinner from "../Spinner/Spinner";
 
 function ItemListContainer() {
 
   const [products, setProducts] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   const params = useParams();
   const id = params.id;
 
   async function getProducts() {
-    if (id === undefined) {
-      try {
-        let response = await getItems();
-        setProducts(response);
-      } catch (error) {
-        alert(error);
-      }
-    } else {
-      try {
-        let response = await getItemsByCategory(id);
-        setProducts(response);
-      } catch (error) {
-        alert(error);
-      }
+    try {
+      setLoading(true);
+      const res = id === undefined ? await getItems() : await getItemsByCategory(id);
+      setProducts(res);
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -34,9 +31,13 @@ function ItemListContainer() {
 
   return (
     <>
-      <div>
-        <ItemList products={products} />
-      </div>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div>
+          <ItemList products={products} />
+        </div>
+      )}
     </>
   );
 }

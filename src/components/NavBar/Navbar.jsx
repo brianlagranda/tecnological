@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import CartWidgetIcon from '../CartWidget/CartWidget';
+import { Link } from "react-router-dom";
 import "./navbar.css";
 
 function NavBar() {
@@ -54,8 +54,9 @@ function NavBar() {
             Almacenamiento
           </Link>
         </li>
-
-        <CartWidgetIcon />
+        <Link to="/cart">
+          <CartWidgetIcon />
+        </Link>
       </ul>
     </nav>
   );

@@ -2,12 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import './itemcount.css';
 
-const ItemCount = ({ start, stock }) => {
+const ItemCount = ({ addToCart, stock }) => {
 
-  const [cant, setCant] = useState(start);
+  const [cant, setCant] = useState(0);
 
   const addItem = (num) => {
-    setCant(cant + num);
+    if (stock > cant)
+      setCant(cant + num);
   };
 
   return (
@@ -18,7 +19,7 @@ const ItemCount = ({ start, stock }) => {
         <button
           className="btn"
           onClick={() => addItem(-1)}
-          disabled={cant === start}
+          disabled={cant === 0}
         >
           -
         </button>
@@ -33,7 +34,7 @@ const ItemCount = ({ start, stock }) => {
       </div>
 
       <div className="itemcount_btns">
-        <button className="btn">
+        <button className="btn" onClick={() => addToCart(cant)}>
           Agregar al carrito
         </button>
       </div>
