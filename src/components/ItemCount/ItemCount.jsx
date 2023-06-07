@@ -26,8 +26,8 @@ const ItemCount = ({ addToCart, stock }) => {
         <span className="quantityInput">{cant}</span>
         <button
           className="btn"
-          onClick={() => addItem(+1)}
-          disabled={cant === stock}
+          onClick={() => addItem(1)}
+          disabled={cant === stock - 1}
         >
           +
         </button>
