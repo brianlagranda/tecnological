@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function NotFoundPage() {
   let navigateTo = useNavigate();
@@ -8,7 +8,7 @@ function NotFoundPage() {
     setTimeout(() => {
       navigateTo(-1);
     }, 2000);
-  }, []);
+  }, [navigateTo]);
 
   return (
     <div>

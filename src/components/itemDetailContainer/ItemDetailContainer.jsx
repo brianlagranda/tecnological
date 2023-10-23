@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getSingleItem } from "../../services/firebase";
-import { cartContext } from "../../storage/cartContext";
-import ItemCount from "../ItemCount/ItemCount.jsx";
-import Spinner from "../Spinner/Spinner.jsx";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./itemdetail.css";
-import { ButtonChild } from "../button/Button";
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { getSingleItem } from '../../services/firebase';
+import { cartContext } from '../../storage/cartContext';
+import ItemCount from '../ItemCount/ItemCount.jsx';
+import Spinner from '../Spinner/Spinner.jsx';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './itemdetail.css';
+import { ButtonChild } from '../button/Button';
 
 function ItemDetailContainer() {
   const [isReady, setReady] = useState(false);
@@ -24,8 +24,7 @@ function ItemDetailContainer() {
 
   if (itemFind) {
     realStock = item.stock - itemFind.cant;
-  }
-  else {
+  } else {
     realStock = item.stock;
   }
 
@@ -46,15 +45,14 @@ function ItemDetailContainer() {
 
   const { addItemToCart } = useContext(cartContext);
 
-  function addToCart(cant) {
-    item.cant = cant;
+  function addToCart(quantity) {
+    item.cant = quantity;
     addItemToCart(item);
     if (addItemToCart(item)) {
-      toast.success("The product has been added to your cart");
+      toast.success('The product has been added to your cart');
       setCart(true);
-    }
-    else {
-      toast.error("The product is already in your cart");
+    } else {
+      toast.error('The product is already in your cart');
     }
   }
 
@@ -62,28 +60,28 @@ function ItemDetailContainer() {
 
   return (
     <>
-      <div className="card-detail_main">
-        <div className="card-detail_img">
-          <img src={item.imgurl} alt="img" />
+      <div className='card-detail_main'>
+        <div className='card-detail_img'>
+          <img src={item.imgurl} alt='img' />
         </div>
 
-        <div className="card-detail_detail">
-          <h1 className="cardDetail_title">{item.title}</h1>
-          <h2 className="cardDetail_price">$ {item.price}</h2>
-          <p className="cardInfo">{item.detail}</p>
+        <div className='card-detail_detail'>
+          <h1 className='cardDetail_title'>{item.title}</h1>
+          <h2 className='cardDetail_price'>$ {item.price}</h2>
+          <p className='cardInfo'>{item.detail}</p>
           {fullCart === false ? (
-            <div className="cardDetail_buttons">
-              <ItemCount addToCart={addToCart} start={0} stock={item.stock} />
-            </div>)
-            : (
-              <>
-                <Link to="/cart">
-                  <ButtonChild>Ir al carrito</ButtonChild>
-                </Link>
+            <div className='cardDetail_buttons'>
+              <ItemCount addToCart={addToCart} start={0} stock={realStock} />
+            </div>
+          ) : (
+            <>
+              <Link to='/cart'>
+                <ButtonChild>Ir al carrito</ButtonChild>
+              </Link>
 
-                <p className="cartInfo">El producto ha sido añadido al carrito</p>
-              </>
-            )}
+              <p className='cartInfo'>El producto ha sido añadido al carrito</p>
+            </>
+          )}
         </div>
       </div>
       <ToastContainer />
