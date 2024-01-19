@@ -1,37 +1,49 @@
 .itemcount_container {
-  border: solid thin rgb(97, 150, 220);
-  border-radius: 15px;
-  padding: 12px 25px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 10px auto;
-  text-align: center;
-  justify-content: space-around;
-  max-width: 480px;
+    border: solid thin rgb(97, 150, 220);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 20px;
+    margin: 10px auto;
+    text-align: center;
+    justify-content: space-around;
 }
 
 .itemcount_control {
-  display: flex;
-  justify-content: space-evenly;
-  padding: 12px 2px 10px;
-  margin-top: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
 }
 
 .itemcount_count {
-  font-weight: bolder;
-  font-size: 22px;
-  color: rgb(97, 150, 220);
+    font-weight: bolder;
+    font-size: 22px;
+    color: rgb(97, 150, 220);
 }
 
 .btn {
-  padding: 8px 20px;
-  color: white;
-  font-size: 15px;
-  max-width: 160px;
-  background-color: rgb(97, 150, 220);
-  border-radius: 4px;
-  border: none;
-  margin: 5px 15px;
-  cursor: pointer;
+    padding: 8px 20px;
+    color: white;
+    font-size: 15px;
+    max-width: 160px;
+    background-color: rgb(97, 150, 220);
+    border-radius: 4px;
+    border: none;
+    margin: 5px 15px;
+    cursor: pointer;
+}
+
+.quantityInput {
+    background-color: #eee;
+    border: 1px solid #999;
+    border-radius: 4px;
+    box-shadow: -1px 1px 2px black;
+    align-self: center;
+    width: 10%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
 }
