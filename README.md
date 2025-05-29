@@ -1,7 +1,7 @@
 
 # Tecnological
 
-Tecnological is a modern landing page built with **React**, **TypeScript**, and **TailwindCSS**, crafted to showcase a fictional technology company’s products and services.
+Tecnological is a modern landing page built with **React**, **JavaScript**, and **TailwindCSS**, crafted to showcase a fictional technology company’s products and services.
 
 This project emphasizes clean layouts, component-based architecture, and responsive design.
 
@@ -18,8 +18,8 @@ This project emphasizes clean layouts, component-based architecture, and respons
 
 ## 🛠 Tech Stack
 
-- **React** (Vite)
-- **TypeScript**
+- **React**
+- **JavaScript**
 - **TailwindCSS**
 
 ---
